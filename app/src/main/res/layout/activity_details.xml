@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/agarwal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="details"
+        android:textAllCaps="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="56dp"
+        android:textSize="36sp"
+
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:text="Name"
+
+        android:id="@+id/username"/>
+
+    <TextView
+        android:id="@+id/userId"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="26sp"
+        android:drawablePadding="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_alignBottom="@id/username"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="#000"
+        android:layout_marginBottom="-48dp"
+
+        android:text="My Name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/userId"
+        android:layout_marginBottom="-49dp"
+        android:layout_marginTop="10dp"
+        android:text="Email"
+        android:id="@+id/password"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:layout_marginLeft="15dp"
+        />
+
+    <TextView
+        android:id="@+id/enteredPassword"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@id/password"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="-64dp"
+        android:textColor="#000"
+        android:drawablePadding="5dp"
+        android:text="My Email"
+        android:textSize="27sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/enteredPassword"
+        android:layout_marginBottom="-42dp"
+        android:paddingLeft="15dp"
+        android:text="Mobile no."
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/enteredPassword"
+        android:layout_marginBottom="-103dp"
+        android:id="@+id/MobileNumber"
+        android:textColor="#000"
+        android:text="Mobile no."
+        android:layout_marginLeft="15dp"
+        android:textSize="27sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="29dp"
+        android:orientation="horizontal"
+        android:padding="-10dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1
+"
+            android:text="LOGOUT"
+            android:id="@+id/logout"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:text="User updates"
+            android:textSize="11dp"
+
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All users" />
+    </LinearLayout>
+
+</RelativeLayout>
+

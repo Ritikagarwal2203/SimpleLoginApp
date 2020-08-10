@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <LinearLayout tools:context=".allUsers"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/root"
+    android:layout_height="100dp"
+    android:layout_margin="10dp"
+
+
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    -<LinearLayout android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="20dp">
+
+    <TextView tools:ignore="HardCodedText"
+        android:text="Name: "
+        style="@style/TextViewUserHeader"/>
+
+    <TextView tools:text="Ritik agarwal"
+        style="@style/TextViewUserContent"
+        android:id="@+id/common_user_name"/>
+
+</LinearLayout>
+
+
+
+
+
+    <LinearLayout android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="1dp"
+    android:layout_marginStart="20dp">
+
+    <TextView tools:ignore="HardCodedText"
+        android:text="Email: "
+        style="@style/TextViewUserHeader"/>
+
+        <TextView
+            android:id="@+id/common_user_email"
+            style="@style/TextViewUserContent"
+            tools:text="abc@gmail.com" />
+
+    </LinearLayout>
+
+
+    <LinearLayout android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="20dp">
+
+    <TextView tools:ignore="HardCodedText"
+        android:text="Contact Number: "
+        style="@style/TextViewUserHeader"/>
+
+    <TextView tools:text="4434545355"
+        style="@style/TextViewUserContent"
+        android:id="@+id/common_user_mobile"/>
+
+</LinearLayout>
+
+</LinearLayout>

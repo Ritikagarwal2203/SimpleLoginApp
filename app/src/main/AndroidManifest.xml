@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ritik"
         android:supportsRtl="true"
         android:theme="@style/SPLASH">
-        <activity android:name=".ForgotPassword"></activity>
-        <activity android:name=".Details" android:theme="@style/AppTheme"/>
+        <activity android:name=".allUsers"></activity>
+        <activity android:name=".ForgotPassword" />
+        <activity
+            android:name=".Details"
+            android:theme="@style/AppTheme" android:label="Profile"/>
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".HomeActivity">

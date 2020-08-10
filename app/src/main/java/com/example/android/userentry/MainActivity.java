@@ -18,6 +18,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private long backPressedTime;
@@ -37,18 +43,23 @@ public class MainActivity extends AppCompatActivity {
         Password=(EditText)findViewById(R.id.enteredPassword);
         Info=(TextView) findViewById(R.id.info);
         Login=(Button) findViewById(R.id.login);
-        firebaseAuth=FirebaseAuth.getInstance();
-        FirebaseUser user=firebaseAuth.getCurrentUser();
-        progressDialog=new ProgressDialog(this);
-        if(user!=null){
 
-            startActivity(new Intent(MainActivity.this,Details.class));
-        }
+        progressDialog=new ProgressDialog(this);
+
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                validate(Name.getText().toString(),Password.getText().toString());
+
+                if(check()){
+                    firebaseAuth=FirebaseAuth.getInstance();
+                    FirebaseUser user=firebaseAuth.getCurrentUser();
+
+
+                        validate(Name.getText().toString(),Password.getText().toString());
+
+                }
+
 
             }
         });
@@ -85,13 +96,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void validate( String userName, String userPassword){
-        progressDialog.setMessage("Wait kerle re bhai");
+        progressDialog.setMessage("Please wait");
         progressDialog.show();
             firebaseAuth.signInWithEmailAndPassword(userName,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                      if (task.isSuccessful()){
-                         progressDialog.dismiss();
+
+
+
                         CheckEmailVerifiction();
                 }
                      else {
@@ -108,16 +121,67 @@ public class MainActivity extends AppCompatActivity {
     }
     private void CheckEmailVerifiction(){
         FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
-        startActivity(new Intent(MainActivity.this,Details.class));
+
         Boolean emailFlag=firebaseUser.isEmailVerified();
         if(emailFlag){
-            finish();
+            isUser();
+
+
 
         }
         else{
             Toast.makeText(MainActivity.this,"Verify your email just recieved",Toast.LENGTH_SHORT).show();
             firebaseAuth.signOut();
+            progressDialog.dismiss();
+
         }
     }
+    private Boolean check(){
+        Boolean n=true;
+        Name=(EditText)findViewById(R.id.userId);
+        Password=(EditText)findViewById(R.id.enteredPassword);
+        String User_name=Name.getText().toString().trim();
+        String User_password=Password.getText().toString().trim();
+        if (User_name.isEmpty()||User_password.isEmpty()){
+            Toast.makeText(MainActivity.this,"Fields cannot be empty",Toast.LENGTH_SHORT).show();
+            n=false;
+            return n;
+        }
+        else{
+            return n;
+        }
+
+    }
+    private void isUser(){
+        Name=(EditText)findViewById(R.id.userId);
+        Password=(EditText)findViewById(R.id.enteredPassword);
+        final String User_name=Encoder.encodeUserEmail(Name.getText().toString().trim());
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("hi");
+        Query checkuser=reference.orderByChild("email").equalTo(User_name);
+        checkuser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    String nameFromDB=snapshot.child(User_name).child("name").getValue(String.class);
+                    String emailFromDB=snapshot.child(User_name).child("email").getValue(String.class);
+                    String mobileNoFromDB=snapshot.child(User_name).child("mobileNo").getValue(String.class);
+                    Intent i=new Intent(MainActivity.this,Details.class);
+                    i.putExtra("name",nameFromDB);
+                    i.putExtra("email",emailFromDB);
+                    i.putExtra("mobileNo",mobileNoFromDB);
+                progressDialog.dismiss();
+                    startActivity(i);
+                    finish();
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
 }

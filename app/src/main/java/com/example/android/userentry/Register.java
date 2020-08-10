@@ -40,18 +40,8 @@ public class Register extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseDatabase=FirebaseDatabase.getInstance();
-                myRef= firebaseDatabase.getReference("hi");
-                String name=FirstName.getText().toString().trim();
-                String Lname=LastName.getText().toString().trim();
-                String emailiser=Email.getText().toString().trim();
-                 
-                String mobno=Mobileno.getText().toString().trim();
-                String FullName=name+" "+Lname;
-                UserProfile profile=new UserProfile(name,emailiser,mobno);
 
-                myRef.child(Encoder.encodeUserEmail(emailiser)).setValue(profile);
-                progressDialog.setMessage("Wait kerle re bhai");
+                progressDialog.setMessage("Please wait"+FirstName.getText().toString().trim());
                 progressDialog.show();
                 if(validate()){
                     String userEmail=Email.getText().toString().trim();
@@ -62,6 +52,7 @@ public class Register extends AppCompatActivity {
                             if(task.isSuccessful()){
 
                                 sendEmailVerification();
+
                             }
                              else {
                                 Toast.makeText(Register.this,"Registration failed",Toast.LENGTH_SHORT).show();
@@ -110,8 +101,9 @@ public class Register extends AppCompatActivity {
         Boolean m=terms.isChecked();
 
         if(name.isEmpty()||Lname.isEmpty()||email.isEmpty()||password.isEmpty()||confirmPassword.isEmpty()||mobno.isEmpty()){
-            Toast.makeText(this,"Please enter all the details",Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
+            Toast.makeText(this,"Please enter all the details",Toast.LENGTH_SHORT).show();
+
         }
         else {
 
@@ -142,6 +134,7 @@ public class Register extends AppCompatActivity {
                         startActivity(new Intent(Register.this,MainActivity.class));
                         progressDialog.dismiss();
                         firebaseAuth.signOut();
+                        sendUserData();
                         finish();
                     }
                     else{
@@ -154,11 +147,22 @@ public class Register extends AppCompatActivity {
         }
     }
     private void sendUserData(){
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        myRef= firebaseDatabase.getReference("hi");
+        String name=FirstName.getText().toString().trim();
+        String Lname=LastName.getText().toString().trim();
+        String emailiser=Encoder.encodeUserEmail(Email.getText().toString().trim());
 
+        String mobno=Mobileno.getText().toString().trim();
+        String FullName=name+" "+Lname;
+        UserProfile profile=new UserProfile(FullName,emailiser,mobno);
+
+        myRef.child(emailiser).setValue(profile);
     }
     @Override
     public void onBackPressed() {
             startActivity(new Intent(Register.this,MainActivity.class));
             finish();
+
     }
 }
